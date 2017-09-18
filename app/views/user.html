@@ -1,0 +1,135 @@
+    <!-- <div ng-include="'views/shell.html'"></div> -->
+    <div ng-controller="UserCtrl">
+    <table border='0' style="width: 100%;clear: both;" >
+    <th width="45%"><md-input-container style="float: left;font: bold;font-size: 12pt;">
+    <label>User:-</label>
+      <md-select ng-model="selected.user" placeholder="Select a user">
+      <md-select-header>
+         <span> Select a user - </span>
+        </md-select-header>
+        <md-option ng-value="r.user" ng-repeat=" r in users">{{ r.user}}</md-option>
+      </md-select>
+    </md-input-container></th>
+
+    <th width="45%" ><md-input-container  style=" font: bold; font-size: 12pt; ">
+    <!-- <label>Case:-</label> -->
+      <md-select ng-model="selected.report" placeholder="Select a report">
+       <md-select-header>
+         <span> Select a report - </span>
+        </md-select-header>
+        <md-option ng-value="r" ng-repeat="r in reports">{{ r }}</md-option>
+      </md-select>
+    </md-input-container></th>
+
+    <th><md-input-container style="float: right; font: bold;font-size: 12pt; ">
+    <label>Case:-</label>
+      <md-select ng-model="selected.case" placeholder="Select a case">
+       <md-select-header>
+         <span> Select a Case - </span>
+        </md-select-header>
+        <md-option ng-value="r.case" ng-repeat="r in cases">{{ r.case }}</md-option>
+      </md-select>
+    </md-input-container></th>
+    <tr>
+    </table>
+
+
+    <div ng-if ="selected.report==='Time Spent in Areas'">
+      <div style="width:60%; float: left;font: bold;font-size: 12pt;">
+      <label style="font: bold;font-size: 12pt;">Here is how much time you spent in each of the following areas within BioWorld during {{selected.case}}:</label>
+        <nvd3 options="options" data="data"></nvd3>
+      </div> 
+      <div style="width:40%; float: left;font: bold;font-size: 12pt;">
+      </br></br>
+        <table>
+           <tbody>
+              <tr><td>You spent the MOST of time in&nbsp;</td> 
+              <td>{{ maxArea }}</td></tr>
+              <tr><td>You spent the LEAST of time in&nbsp;</td> <td>{{minArea}}</td>
+               </tr>
+            </tbody>
+         </table>
+          <label style="font: bold;font-size: 12pt;">Reflection</label></br>
+          <span>Are these descriptions accurate in describing your actions in Bioworld?</span></br>
+           <div>
+          <a href="#" editable-select="user.status" e-ng-options="s.value as s.text for s in statuses">
+              {{ showStatus() }}
+            </a>
+          </div>
+                    <span>Would you like to focus on spending more time in another area?</span></br>
+                     <div>
+                    <a href="#" editable-select="user2.status" e-ng-options="s.value as s.text for s in statuses2">
+        {{ showStatus2() }}
+      </a>
+    </div>
+    <span>If Yes, which area would you like to focus on?</span></br>
+    <div>
+      <a href="#" editable-select="user1.status" e-ng-options="s.value as s.text for s in statuses1">
+        {{ showStatus1() }}
+      </a>
+    </div>
+  </div>
+    </div> 
+    <div ng-if ="selected.report==='Time Spent on Actions'">
+      <div style="width:60%; float: left;font: bold;font-size: 12pt;">
+          <label style="font: bold;font-size: 12pt;">Here is how much time you spent on the following actions while trying to diagnose the patient in {{selected.case}}:</label>
+          <nvd3 options="options2" data="data1"></nvd3>
+      </div> 
+    <div style="width:40%; float: left;font: bold;font-size: 12pt;">
+        </br></br></br>
+        <label style="font: bold;font-size: 12pt;">Reflection</label></br>
+          <span>Was there any particular evidence that made you certain you would be matched with the expert solution?</span></br>
+           <div>
+              <a href="#" editable-select="user.status" e-ng-options="s.value as s.text for s in statuses">
+                  {{ showStatus() }}
+                </a>
+          </div>
+           <span>How do you think you could improve on the next case with selecting appropriate evidence?</span></br>
+           <div><a href="#" editable-textarea="user.desc" e-rows="4" e-cols="40">
+        {{ user.desc || 'no description' }}
+      </a></div>
+                       <span>Here are some suggestions:
+                     <ul>
+                       <li>Evaluate my specific goals for the next case to focus on selecting evidence</li>
+                       <li>Spending more time on reading the patient history</li>
+                       <li>Selecting more lab tests to identify which unrelated evidences to unlink</li>
+                     </ul>
+                     <div><a href="#" editable-textarea="user.desc" e-rows="7" e-cols="40">
+        {{ user.desc || 'no description' }}
+      </a></div>
+                    </span></br>
+                  
+    </div>
+    </div>
+    <div ng-if ="selected.report==='Feedback'">gowry
+    <div style="width:60%; float: left;font: bold;font-size: 12pt;">
+    <nvd3 options="options1" data="data2"></nvd3>
+    </div>
+    <div style="width:40%; float: left;font: bold;font-size: 12pt;">
+    <table>
+
+                        <tbody>
+                        <tr><td>The total time you spent on feedback:</td> <td>{{ftime+ ' seconds' }}</td> </tr>
+                        <tr><td>Your accepted feedback:</td> <td>{{faccepting + ' times'}}</td>
+                        </tr>
+                        <tr><td>Your modified/manipulated feedback:</td> <td>{{fmodifying_manipulating + ' times' }}</td></tr>
+                        <tr><td>Your rejected feedback: </td> <td>{{frejecting + ' times'}}</td>
+                        </tr>
+                        <tr><td>Your sought feedback:</td> <td>{{fseeking + ' times'}}</td>
+                        </tr>
+                        <tr><td>Your self generated feedback:</td> <td>{{fself_generating + ' times' }}</td>
+                        </tr>
+                        <tr><td>Your self generated feedback:</td> <td>{{fself_generating + ' times' }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <label style="font: bold;font-size: 12pt;">Reflection</label></br>
+                    <span>Is this an accurate reflection of your response to feedback?</span>
+                    <div>
+      <a href="#" editable-select="user.status" e-ng-options="s.value as s.text for s in statuses">
+        {{ showStatus() }}
+      </a>
+    </div>
+                    </div>
+    </div>
+    </div>

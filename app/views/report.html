@@ -1,0 +1,82 @@
+    <div ng-include="'views/shell.html'"></div>
+    <!-- <div ng-include="'views/shell.html'"></div> -->
+    <div ng-controller="ReportCtrl">
+    <table border='0' style="width: 100%;clear: both;" >
+    <th width="45%"><md-input-container style="float: left;font: bold;font-size: 12pt;">
+    <label>User:-</label>
+      <md-select ng-model="selected.user" placeholder="Select a user">
+      <md-select-header>
+         <span> Select a user - </span>
+        </md-select-header>
+        <md-option ng-value="r.user" ng-repeat=" r in users">{{ r.user}}</md-option>
+      </md-select>
+    </md-input-container></th>
+
+    <th width="45%" ><md-input-container  style=" font: bold; font-size: 12pt; ">
+    <!-- <label>Case:-</label> -->
+      <md-select ng-model="selected.report" placeholder="Select a report">
+       <md-select-header>
+         <span> Select a report - </span>
+        </md-select-header>
+        <md-option ng-value="r" ng-repeat="r in reports">{{ r }}</md-option>
+      </md-select>
+    </md-input-container></th>
+
+    <!-- <th><md-input-container style="float: right; font: bold;font-size: 12pt; ">
+    <label>Case:-</label>
+      <md-select ng-model="selected.case" placeholder="Select a case">
+       <md-select-header>
+         <span> Select a Case - </span>
+        </md-select-header>
+        <md-option ng-value="r.case" ng-repeat="r in cases">{{ r.case }}</md-option>
+      </md-select>
+    </md-input-container></th> -->
+    <tr>
+    </table>
+
+
+    <div ng-if ="selected.report==='Time Spent in Areas'">
+      <div style="width:60%; float: left;font: bold;font-size: 12pt;">
+      <!-- <label style="font: bold;font-size: 12pt;">Here is how much time you spent in each of the following areas within BioWorld during {{selected.case}}:</label> -->
+        <nvd3 options="options" data="data"></nvd3>
+      </div> 
+      <div style="width:40%; float: left;font: bold;font-size: 12pt;">
+      <br><br>
+       <table id="data-table">
+                        <thead>
+                            <tr>
+                                <td>Cases</td>
+                                <td>Area---Total Spent Time(s)</td>
+                             </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="3" style="text-align:center">There are no items to list...</td>
+                        </tr>
+                        </tbody>
+                    </table>
+      </div>
+    </div> 
+    <div ng-if ="selected.report==='Time Spent on Actions'">
+    <div style="width:60%; float: left;font: bold;font-size: 12pt;">
+       <nvd3 options="options1" data="data1"></nvd3>
+    </div> 
+    <div style="width:40%; float: left;font: bold;font-size: 12pt;">
+         <br><br><br>
+         <table id="data-table">
+                        <thead>
+                            <tr>
+                                <td>Cases</td>
+                                <td>Action---Total Spent Time(s)</td>
+                             </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="3" style="text-align:center">There are no items to list...</td>
+                        </tr>
+                        </tbody>
+                    </table>
+   
+    </div>
+    </div>
+</div>
