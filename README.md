@@ -1,7 +1,7 @@
 # bioDashboard
 ======================
 
-Copyright(c) 2014-2015 Yoshiaki Matsuzawa All rights researved.
+Copyright(c) 2017-2018 Suresh Tharuma All rights researved.
 
 Creating Development Environment
 --------------------------------
